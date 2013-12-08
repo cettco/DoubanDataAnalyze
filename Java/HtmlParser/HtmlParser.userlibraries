@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<eclipse-userlibraries>
+  <library name="Dojo-1.8.3">
+    <archive path="/home/van/.IntelliJIdea12/system/extLibs/http_download.dojotoolkit.org_release-1.8.3_dojo.js.uncompressed.js" />
+  </library>
+  <library name="java-7-oracle" />
+  <library name="scala-2">
+    <archive path="/usr/local/scala-2.11" />
+  </library>
+  <library name="scala-compiler">
+    <archive path="/usr/local/scala-2.11/lib/scala-compiler.jar" />
+    <archive path="/usr/local/scala-2.11/lib/scala-library.jar" />
+    <archive path="/usr/local/scala-2.11/lib/scala-reflect.jar" />
+  </library>
+  <library name="scala-library">
+    <archive path="/usr/local/scala-2.11/lib/scala-library.jar" />
+    <archive path="/usr/local/scala-2.11/lib/scala-swing.jar" />
+    <archive path="/usr/local/scala-2.11/lib/scala-actors.jar" />
+  </library>
+  <library name="sdk">
+    <archive path="/home/van/App/android-studio/sdk" />
+  </library>
+</eclipse-userlibraries>
+

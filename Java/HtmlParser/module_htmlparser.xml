@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_htmlparser" default="compile.module.htmlparser">
+  <dirname property="module.htmlparser.basedir" file="${ant.file.module_htmlparser}"/>
+  
+  <property name="module.jdk.home.htmlparser" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.htmlparser" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.htmlparser" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.htmlparser" value="${compiler.args}"/>
+  
+  <property name="htmlparser.output.dir" value="${module.htmlparser.basedir}/out/production/HtmlParser"/>
+  <property name="htmlparser.testoutput.dir" value="${module.htmlparser.basedir}/out/test/HtmlParser"/>
+  
+  <path id="htmlparser.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="htmlparser.module.production.classpath">
+    <path refid="${module.jdk.classpath.htmlparser}"/>
+  </path>
+  
+  <path id="htmlparser.runtime.production.module.classpath">
+    <pathelement location="${htmlparser.output.dir}"/>
+  </path>
+  
+  <path id="htmlparser.module.classpath">
+    <path refid="${module.jdk.classpath.htmlparser}"/>
+    <pathelement location="${htmlparser.output.dir}"/>
+  </path>
+  
+  <path id="htmlparser.runtime.module.classpath">
+    <pathelement location="${htmlparser.testoutput.dir}"/>
+    <pathelement location="${htmlparser.output.dir}"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.htmlparser">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.htmlparser">
+    <patternset refid="excluded.from.module.htmlparser"/>
+  </patternset>
+  
+  <path id="htmlparser.module.sourcepath">
+    <dirset dir="${module.htmlparser.basedir}">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.htmlparser" depends="compile.module.htmlparser.production,compile.module.htmlparser.tests" description="Compile module HtmlParser"/>
+  
+  <target name="compile.module.htmlparser.production" depends="register.custom.compilers" description="Compile module HtmlParser; production classes">
+    <mkdir dir="${htmlparser.output.dir}"/>
+    <javac2 destdir="${htmlparser.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.htmlparser}/javac">
+      <compilerarg line="${compiler.args.htmlparser}"/>
+      <bootclasspath refid="htmlparser.module.bootclasspath"/>
+      <classpath refid="htmlparser.module.production.classpath"/>
+      <src refid="htmlparser.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.htmlparser"/>
+    </javac2>
+    
+    <copy todir="${htmlparser.output.dir}">
+      <fileset dir="${module.htmlparser.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.htmlparser.tests" depends="register.custom.compilers,compile.module.htmlparser.production" description="compile module HtmlParser; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.htmlparser" description="cleanup module">
+    <delete dir="${htmlparser.output.dir}"/>
+    <delete dir="${htmlparser.testoutput.dir}"/>
+  </target>
+</project>
